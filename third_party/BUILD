@@ -2,7 +2,7 @@ package(default_visibility = ["//visibility:public"])
 
 java_import(
     name = "guava",
-    jars = ["guava/guava-19.0.jar"],
+    jars = ["guava/guava-23.6-jre.jar"],
 )
 
 java_import(
@@ -25,17 +25,24 @@ java_import(
 
 java_import(
     name = "dagger_api",
-    jars = ["dagger/dagger-2.5.jar"],
+    jars = ["dagger/dagger-2.14.1.jar"],
+    exports = [":guava"],
+)
+
+java_import(
+    name = "dagger_spi",
+    jars = ["dagger/dagger-spi-2.14.1.jar"],
 )
 
 java_import(
     name = "dagger_compiler",
-    jars = ["dagger/dagger-compiler-2.5.jar"],
+    jars = ["dagger/dagger-compiler-2.14.1.jar"],
+    exports = [":dagger_spi"],
 )
 
 java_import(
     name = "dagger_producers",
-    jars = ["dagger/dagger-producers-2.5.jar"],
+    jars = ["dagger/dagger-producers-2.14.1.jar"],
 )
 
 java_library(
@@ -43,6 +50,8 @@ java_library(
     exported_plugins = [":dagger_plugin"],
     exports = [
         ":dagger_api",
+        ":googlejavaformat",
+        ":guava",
         ":jsr330_inject",
     ],
 )
@@ -54,8 +63,25 @@ java_plugin(
         ":dagger_api",
         ":dagger_compiler",
         ":dagger_producers",
+        ":googlejavaformat",
         ":guava",
+        ":java_poet",
         ":jsr330_inject",
     ],
 )
 
+java_import(
+    name = "googlejavaformat",
+    jars = ["googlejavaformat/google-java-format-1.5.jar"],
+    exports = [":error_prone_javac_shaded"],
+)
+
+java_import(
+    name = "error_prone_javac_shaded",
+    jars = ["errorprone/javac-shaded-9-dev-r4023-3.jar"],
+)
+
+java_import(
+    name = "java_poet",
+    jars = ["javapoet/javapoet-1.9.0.jar"],
+)
