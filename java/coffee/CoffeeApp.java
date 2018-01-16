@@ -1,5 +1,6 @@
 package coffee;
 
+import coffee.dripcoffee.DripCoffeeModule;
 import dagger.Component;
 import javax.inject.Singleton;
 

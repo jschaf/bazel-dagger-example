@@ -1,4 +1,6 @@
-package coffee;
+package coffee.dripcoffee;
+
+import coffee.Heater;
 
 class ElectricHeater implements Heater {
   boolean heating;

@@ -1,5 +1,7 @@
-package coffee;
+package coffee.dripcoffee;
 
+import coffee.Heater;
+import coffee.Pump;
 import javax.inject.Inject;
 
 class Thermosiphon implements Pump {
